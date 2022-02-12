@@ -12,36 +12,31 @@ function App() {
 
   const getToday = () => {
     let today = new Date();
-    return today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    return today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
   }
 
   const clicked = () => {
     if (!alreadyClicked) {
       localStorage.setItem(LOCAL_STORE_KEY, getToday())
       setAlreadtClicked(1)
-    }else {
+    } else {
+      setResetClicks(resetClicks + 1)
       if (resetClicks == 10) {
         setResetClicks(0)
         localStorage.setItem(LOCAL_STORE_KEY, "")
-      setAlreadtClicked(0)
-      } else {
-        setResetClicks(resetClicks + 1)
+        setAlreadtClicked(0)
       }
     }
   }
 
   useEffect(() => {
     let localStore = localStorage.getItem(LOCAL_STORE_KEY) ?? ""
-    
-    if (localStore == getToday()) { 
+
+    if (localStore == getToday()) {
       setAlreadtClicked(2)
     }
 
   }, [])
-
-  
-
-
 
   return (
     <div className="App">
@@ -58,49 +53,49 @@ function App() {
           direction: 'rtl'
         }}>
           {
-          alreadyClicked == 2 ? (
-            
-      <h1>כבר הודית על הזכות היום! בוא שוב להודות מחר
-      <br></br>
-      <br></br>
-      </h1>
-          ) :
-          alreadyClicked == 1 ?
-          (
-            
-            <h1>תודה שהודית על הזכות היוום! יום נעים☺️
-            <br></br>
-            <br></br>
-            </h1>
-                ) : (
-            
-            <h1>כבר הודית על הזכות היום?
-            <br></br>
-            <br></br>
-              לחץ כאן כדי להודות על הזכות
-            <br></br>
-            <br></br>
-      
-            </h1>
-                )
-        }
-            <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+            alreadyClicked == 2 ? (
 
-        <div id="Button" onClick={clicked} style={{
-          height: '250px',
-          width: '250px',
-          backgroundColor: 'white',
-          borderRadius: '50%',
-          cursor: 'pointer',
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
-          <img src={logo} style={{
-            width: '175px'
-          }}></img>
-        </div>
-        </div>
+              <h1>כבר הודית על הזכות היום! בוא שוב להודות מחר
+                <br></br>
+                <br></br>
+              </h1>
+            ) :
+              alreadyClicked == 1 ?
+                (
+
+                  <h1>תודה שהודית על הזכות היום! יום נעים 😊
+                    <br></br>
+                    <br></br>
+                  </h1>
+                ) : (
+
+                  <h1>כבר הודית על הזכות היום?
+                    <br></br>
+                    <br></br>
+                    לחץ כאן כדי להודות על הזכות
+                    <br></br>
+                    <br></br>
+
+                  </h1>
+                )
+          }
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+
+            <div id="Button" onClick={clicked} style={{
+              height: '250px',
+              width: '250px',
+              backgroundColor: 'white',
+              borderRadius: '50%',
+              cursor: 'pointer',
+              alignItems: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+              <img src={logo} style={{
+                width: '175px'
+              }}></img>
+            </div>
+          </div>
         </div>
       </div>
     </div>
